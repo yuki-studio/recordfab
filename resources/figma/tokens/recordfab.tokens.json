@@ -1,0 +1,269 @@
+{
+  "meta": {
+    "name": "RecordFab Design Tokens",
+    "updatedAt": "2026-05-13",
+    "fileKey": "f7bHkVNYG1X14LwsMgkPgx",
+    "sources": [
+      "docs/figma/0-1367_home_workspace.md",
+      "docs/figma/0-6327_sidebar.md",
+      "docs/figma/0-5139_setting_dialog_shell.md",
+      "docs/figma/0-5068_setting_proxy.md",
+      "docs/figma/0-6216_welcome_dialog.md",
+      "docs/figma/0-7754_trial_welcome_dialog.md",
+      "docs/figma/0-6611_authorize_dialog_default.md",
+      "docs/figma/0-1755_myfiles_list.md",
+      "docs/figma/0-7911_record_setting_dialog.md",
+      "docs/figma/0-2627_search_dropdown.md",
+      "docs/figma/0-6596_deauthorize_success_dialog.md",
+      "docs/figma/0-2250_history_empty.md",
+      "docs/figma/0-2085_history_filled.md"
+    ]
+  },
+  "color": {
+    "background": {
+      "app": "#202020"
+    },
+    "surface": {
+      "sidebar": "#161719",
+      "field": "#242426",
+      "stepper": "#323234",
+      "hover": "#2a2a2c",
+      "dialogDeauthorizeBg": "TODO"
+    },
+    "text": {
+      "title": "#eeeeee",
+      "primary": "#ffffff",
+      "secondary": "#aeb1b6",
+      "muted": "#595b5f",
+      "link": "#4162fb",
+      "registerMuted": "#7f8288"
+    },
+    "brand": {
+      "primary": "#4162fb",
+      "primaryGradient": "#4162fb→#4465ff",
+      "googleGradient": "#4162fb→#7041fb",
+      "googleStampBorder": "#475ffb"
+    },
+    "feedback": {
+      "badgeBg": "#e02020",
+      "success": "TODO"
+    },
+    "accent": {
+      "tag": "#fa8a03"
+    },
+    "border": {
+      "secondary": "#7f8186",
+      "dividerStrong": "#292929",
+      "dividerDialog": "#2a2a2c",
+      "dividerRecording": "#292935",
+      "inputFocus": "#4162fb"
+    },
+    "placeholder": {
+      "thumbnail": "#d8d8d8"
+    }
+  },
+  "typography": {
+    "fontFamily": {
+      "base": "Arial"
+    },
+    "fontSize": {
+      "title": 20,
+      "h3": 16,
+      "body": 14,
+      "buttonLg": 16,
+      "anchor": 12,
+      "tag": 12
+    },
+    "lineHeight": {
+      "title": 28,
+      "bannerTitle": 36,
+      "h3": 20,
+      "body": 20,
+      "buttonLg": 18,
+      "anchor": 16,
+      "tag": 18
+    }
+  },
+  "radius": {
+    "dialog": 12,
+    "card": 8,
+    "button": 6,
+    "buttonPrimaryLarge": 14,
+    "buttonAuthorize": 8,
+    "inputSm": 4,
+    "inputLg": 6,
+    "thumbnail": 4,
+    "badge": 8,
+    "tag": 12,
+    "scrollbar": 3,
+    "stepper": 2
+  },
+  "shadow": {
+    "dialog": "0 12px 40px 0 rgba(15,16,17,0.2)",
+    "dividerTopbar": "inset 0 -1px 0 #2a2a2c"
+  },
+  "size": {
+    "icon": {
+      "base": 16,
+      "benefit": 24,
+      "searchLeading": 14,
+      "feedback": 32
+    },
+    "button": {
+      "default": {
+        "w": 88,
+        "h": 32
+      },
+      "trial": {
+        "w": 104,
+        "h": 32
+      },
+      "welcomePrimary": {
+        "w": 130,
+        "h": 32
+      },
+      "formLg": {
+        "w": 400,
+        "h": 44
+      },
+      "clearHistory": {
+        "w": 132,
+        "h": 32
+      }
+    },
+    "field": {
+      "h": 32,
+      "hLg": 44,
+      "search": {
+        "w": 800,
+        "h": 28
+      }
+    },
+    "topbar": {
+      "h": 44,
+      "wSample": 960
+    },
+    "dropdown": {
+      "searchHistory": {
+        "w": 800,
+        "h": 168
+      },
+      "itemH": 32
+    },
+    "dialog": {
+      "setting": {
+        "w": 868,
+        "h": 634
+      },
+      "welcome": {
+        "w": 740,
+        "h": 482,
+        "bodyW": 660,
+        "benefitTextW": 260
+      },
+      "trialWelcome": {
+        "w": 740,
+        "h": 422
+      },
+      "authorize": {
+        "w": 480,
+        "h": 550
+      },
+      "recordSetting": {
+        "w": 624,
+        "h": 414
+      },
+      "deauthorizeSuccess": {
+        "w": 560,
+        "h": 222
+      },
+      "history": {
+        "w": 868,
+        "h": 574
+      }
+    },
+    "illustration": {
+      "empty": {
+        "w": 100,
+        "h": 80
+      }
+    },
+    "history": {
+      "rowH": 48,
+      "dateHeaderH": 40,
+      "logo": 24,
+      "scrollbarW": 6,
+      "columns": {
+        "title": 308,
+        "url": 260,
+        "time": 80
+      }
+    }
+  },
+  "spacing": {
+    "dialogPadding": {
+      "setting": 32,
+      "welcome": 40,
+      "deauthorize": 32,
+      "history": 32
+    },
+    "gap": {
+      "buttonGroup": 8,
+      "iconToText": 8
+    },
+    "dialog": {
+      "deauthorize": {
+        "paddingTop": 18,
+        "paddingBottom": 32,
+        "iconToTextGap": 32,
+        "titleToDescGap": 8,
+        "contentToButtonGap": 20
+      },
+      "history": {
+        "paddingTop": 18,
+        "titleToSearchbarGap": 32,
+        "searchbarToButtonGap": 22,
+        "emptyImageToTextGap": 16,
+        "itemPaddingX": 16,
+        "itemColumnGap": 24,
+        "scrollbarRightInset": 8
+      },
+      "welcome": {
+        "titleTop": 66,
+        "bodyTop": 134,
+        "subtitleTop": 214,
+        "benefitRow1Top": 258,
+        "buttonsTop": 410,
+        "bannerToBody": 16,
+        "bodyToSubtitle": 40,
+        "subtitleToBenefits": 24,
+        "benefitRowStep": 48,
+        "benefitsToButtons": 34,
+        "buttonsToBottom": 40,
+        "benefitColumnGap": 76,
+        "benefitIconToText": 8,
+        "secondaryBtnGap": 8,
+        "bannerH": 118,
+        "primaryBtnRightInset": 40
+      }
+    },
+    "toolbar": {
+      "navIconStep": 32,
+      "navToInputGap": 32,
+      "inputToHistoryEntryGap": 16
+    },
+    "input": {
+      "leadingIconPaddingLeft": 16
+    },
+    "dropdown": {
+      "gapFromTrigger": 4,
+      "topPadding": 4,
+      "itemHorizontalInset": 4,
+      "itemIconPadding": 12
+    }
+  },
+  "notes": {
+    "tagBorderOpacity": 0.3,
+    "dropdownItemIconPaddingSource": "由 Figma 1.52% × 792 折算 ≈ 12px，实现时如有像素错位以此为初值微调"
+  }
+}

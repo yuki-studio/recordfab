@@ -1,0 +1,283 @@
+{
+  "meta": {
+    "name": "RecordFab Tokens Sources",
+    "updatedAt": "2026-05-13",
+    "fileKey": "f7bHkVNYG1X14LwsMgkPgx",
+    "note": "更新于 2026-05-14：补全 0-6216 welcome 弹窗的垂直节奏与精确间距 token（titleTop/bodyTop/subtitleTop/benefitRow1Top/buttonsTop 等绝对坐标 + bannerToBody/bodyToSubtitle/subtitleToBenefits/benefitRowStep/benefitsToButtons/buttonsToBottom 等相对间距）"
+  },
+  "canonicalTokensFile": "resources/figma/tokens/recordfab.tokens.json",
+  "docsAreNodeCaches": true,
+  "docs": [
+    {
+      "path": "docs/figma/0-1367_home_workspace.md",
+      "nodeId": "0:1367",
+      "contributes": [
+        "color.background.app",
+        "color.border.dividerStrong",
+        "color.text.title",
+        "color.text.secondary",
+        "color.text.muted",
+        "color.brand.primary",
+        "color.brand.primaryGradient",
+        "color.surface.sidebar",
+        "radius.button",
+        "radius.buttonPrimaryLarge",
+        "radius.scrollbar",
+        "typography.*"
+      ]
+    },
+    {
+      "path": "docs/figma/0-6327_sidebar.md",
+      "nodeId": "0:6327",
+      "contributes": [
+        "color.surface.sidebar",
+        "color.text.link",
+        "color.text.secondary",
+        "color.text.muted",
+        "color.feedback.badgeBg",
+        "radius.badge",
+        "radius.sidebarSelected",
+        "typography.*"
+      ]
+    },
+    {
+      "path": "docs/figma/0-5139_setting_dialog_shell.md",
+      "nodeId": "0:5139",
+      "contributes": [
+        "color.background.app",
+        "shadow.dialog",
+        "shadow.dividerTopbar",
+        "color.border.secondary",
+        "color.text.title",
+        "color.text.primary",
+        "color.brand.primary",
+        "size.button.default",
+        "radius.dialog",
+        "radius.button"
+      ]
+    },
+    {
+      "path": "docs/figma/0-5068_setting_proxy.md",
+      "nodeId": "0:5068",
+      "contributes": [
+        "color.border.dividerDialog",
+        "color.surface.field",
+        "radius.inputSm",
+        "size.field.h"
+      ]
+    },
+    {
+      "path": "docs/figma/0-6216_welcome_dialog.md",
+      "nodeId": "0:6216",
+      "updatedAt": "2026-05-14",
+      "contributes": [
+        "size.dialog.welcome",
+        "radius.dialog",
+        "size.icon.benefit",
+        "size.icon.base",
+        "size.button.welcomePrimary",
+        "size.button.default",
+        "color.background.app",
+        "color.text.primary",
+        "color.text.title",
+        "color.text.link",
+        "color.text.secondary",
+        "color.border.secondary",
+        "color.brand.primary",
+        "radius.button",
+        "typography.fontSize.body",
+        "typography.lineHeight.body",
+        "typography.fontSize.h3",
+        "typography.lineHeight.h3",
+        "spacing.dialogPadding.welcome",
+        "spacing.dialog.welcome.titleTop",
+        "spacing.dialog.welcome.bodyTop",
+        "spacing.dialog.welcome.subtitleTop",
+        "spacing.dialog.welcome.benefitRow1Top",
+        "spacing.dialog.welcome.buttonsTop",
+        "spacing.dialog.welcome.bannerToBody",
+        "spacing.dialog.welcome.bodyToSubtitle",
+        "spacing.dialog.welcome.subtitleToBenefits",
+        "spacing.dialog.welcome.benefitRowStep",
+        "spacing.dialog.welcome.benefitsToButtons",
+        "spacing.dialog.welcome.buttonsToBottom",
+        "spacing.dialog.welcome.benefitColumnGap",
+        "spacing.dialog.welcome.benefitIconToText",
+        "spacing.dialog.welcome.secondaryBtnGap",
+        "spacing.dialog.welcome.bannerH",
+        "spacing.dialog.welcome.primaryBtnRightInset"
+      ]
+    },
+    {
+      "path": "docs/figma/0-7754_trial_welcome_dialog.md",
+      "nodeId": "0:7754",
+      "contributes": [
+        "size.dialog.trialWelcome",
+        "radius.dialog",
+        "size.button.trial",
+        "shadow.dividerTopbar"
+      ]
+    },
+    {
+      "path": "docs/figma/0-6611_authorize_dialog_default.md",
+      "nodeId": "0:6611",
+      "contributes": [
+        "size.dialog.authorize",
+        "radius.inputLg",
+        "radius.buttonAuthorize",
+        "color.brand.googleGradient",
+        "color.brand.googleStampBorder",
+        "color.text.registerMuted",
+        "size.button.formLg",
+        "size.field.hLg",
+        "typography.fontSize.buttonLg",
+        "typography.lineHeight.buttonLg"
+      ]
+    },
+    {
+      "path": "docs/figma/0-1755_myfiles_list.md",
+      "nodeId": "0:1755",
+      "contributes": [
+        "color.surface.field",
+        "color.surface.hover",
+        "color.accent.tag",
+        "notes.tagBorderOpacity",
+        "radius.card",
+        "radius.tag"
+      ]
+    },
+    {
+      "path": "docs/figma/0-7911_record_setting_dialog.md",
+      "nodeId": "0:7911",
+      "contributes": [
+        "size.dialog.recordSetting",
+        "shadow.dialog",
+        "color.surface.field",
+        "color.surface.stepper",
+        "color.border.dividerRecording",
+        "radius.stepper",
+        "radius.thumbnail",
+        "spacing.dialogPadding.setting"
+      ]
+    },
+    {
+      "path": "docs/figma/0-6596_deauthorize_success_dialog.md",
+      "nodeId": "0:6596",
+      "contributes": [
+        "color.text.primary",
+        "color.text.title",
+        "color.text.secondary",
+        "color.brand.primary",
+        "color.feedback.success",
+        "color.surface.dialogDeauthorizeBg",
+        "radius.button",
+        "size.button.default",
+        "size.icon.base",
+        "size.icon.feedback",
+        "size.dialog.deauthorizeSuccess",
+        "spacing.dialogPadding.deauthorize",
+        "spacing.dialog.deauthorize.paddingTop",
+        "spacing.dialog.deauthorize.paddingBottom",
+        "spacing.dialog.deauthorize.iconToTextGap",
+        "spacing.dialog.deauthorize.titleToDescGap",
+        "spacing.dialog.deauthorize.contentToButtonGap",
+        "typography.fontSize.body",
+        "typography.lineHeight.body"
+      ]
+    },
+    {
+      "path": "docs/figma/0-2085_history_filled.md",
+      "nodeId": "0:2085",
+      "contributes": [
+        "color.background.app",
+        "color.text.title",
+        "color.text.secondary",
+        "color.surface.field",
+        "color.surface.hover",
+        "color.surface.stepper",
+        "radius.dialog",
+        "radius.button",
+        "radius.inputSm",
+        "shadow.dialog",
+        "size.icon.base",
+        "size.dialog.history",
+        "size.history.rowH",
+        "size.history.dateHeaderH",
+        "size.history.logo",
+        "size.history.scrollbarW",
+        "size.history.columns.title",
+        "size.history.columns.url",
+        "size.history.columns.time",
+        "spacing.dialogPadding.history",
+        "spacing.dialog.history.itemPaddingX",
+        "spacing.dialog.history.itemColumnGap",
+        "spacing.dialog.history.scrollbarRightInset",
+        "typography.fontSize.body",
+        "typography.lineHeight.body"
+      ]
+    },
+    {
+      "path": "docs/figma/0-2250_history_empty.md",
+      "nodeId": "0:2250",
+      "contributes": [
+        "color.background.app",
+        "color.text.primary",
+        "color.text.secondary",
+        "color.text.muted",
+        "color.surface.sidebar",
+        "color.surface.hover",
+        "radius.dialog",
+        "radius.button",
+        "shadow.dialog",
+        "size.icon.base",
+        "size.icon.searchLeading",
+        "size.field.h",
+        "size.dialog.history",
+        "size.button.clearHistory",
+        "size.illustration.empty",
+        "spacing.dialogPadding.history",
+        "spacing.dialog.history.paddingTop",
+        "spacing.dialog.history.titleToSearchbarGap",
+        "spacing.dialog.history.searchbarToButtonGap",
+        "spacing.dialog.history.emptyImageToTextGap",
+        "typography.fontSize.body",
+        "typography.lineHeight.body"
+      ]
+    },
+    {
+      "path": "docs/figma/0-2627_search_dropdown.md",
+      "nodeId": "0:2627",
+      "contributes": [
+        "color.background.app",
+        "color.surface.sidebar",
+        "color.surface.field",
+        "color.surface.hover",
+        "color.text.title",
+        "color.text.link",
+        "color.brand.primary",
+        "color.border.inputFocus",
+        "radius.button",
+        "radius.card",
+        "radius.inputSm",
+        "size.icon.base",
+        "size.icon.searchLeading",
+        "size.topbar.h",
+        "size.topbar.wSample",
+        "size.field.search",
+        "size.dropdown.searchHistory",
+        "size.dropdown.itemH",
+        "spacing.toolbar.navIconStep",
+        "spacing.toolbar.navToInputGap",
+        "spacing.toolbar.inputToHistoryEntryGap",
+        "spacing.input.leadingIconPaddingLeft",
+        "spacing.dropdown.gapFromTrigger",
+        "spacing.dropdown.topPadding",
+        "spacing.dropdown.itemHorizontalInset",
+        "spacing.dropdown.itemIconPadding",
+        "typography.fontSize.body",
+        "typography.lineHeight.body"
+      ]
+    }
+  ]
+}
+
