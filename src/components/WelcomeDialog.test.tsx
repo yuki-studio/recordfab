@@ -37,4 +37,11 @@ describe('WelcomeDialog', () => {
     expect(useRecording.getState().authorizeDialogOpen).toBe(true)
     expect(screen.getByText('Authorize this computer with your account.')).toBeTruthy()
   })
+
+  it('uses design dimensions 740x482 for the dialog', () => {
+    render(<DialogHarness />)
+    const dialog = screen.getByRole('dialog')
+    expect(dialog.className).toContain('w-[740px]')
+    expect(dialog.className).toContain('h-[482px]')
+  })
 })

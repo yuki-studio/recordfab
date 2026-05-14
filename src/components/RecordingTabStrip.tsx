@@ -41,10 +41,6 @@ export default function RecordingTabStrip({
           const active = tab.id === activeTabId
           const showClose = hoveredTabId === tab.id && tab.id !== 'home'
           const showRecording = tab.id === recordingTabId
-          const sizeClass =
-            tab.id === 'home'
-              ? 'w-[224px]'
-              : 'min-w-[200px] max-w-[360px]'
 
           const isLast = idx === tabs.length - 1
           const nextActive = !isLast && tabs[idx + 1].id === activeTabId
@@ -57,7 +53,7 @@ export default function RecordingTabStrip({
                 onClick={() => onSelect(tab.id)}
                 onMouseEnter={() => setHoveredTabId(tab.id)}
                 onMouseLeave={() => setHoveredTabId((prev) => (prev === tab.id ? null : prev))}
-                className={`group relative flex h-11 w-auto items-center justify-between gap-2 px-4 text-[14px] leading-5 ${sizeClass} ${
+                className={`group relative flex h-11 w-[224px] items-center justify-between gap-2 px-4 text-[14px] leading-5 ${
                   active ? 'text-[#eee]' : 'text-[#aeb1b6]'
                 }`}
                 style={{
@@ -88,7 +84,8 @@ export default function RecordingTabStrip({
                   {showClose ? (
                     <span
                       role="button"
-                      aria-label="close tab"
+                      aria-label="Close"
+                      title="Close"
                       className="grid size-4 place-items-center rounded hover:bg-white/10"
                       onClick={(e) => {
                         e.stopPropagation()

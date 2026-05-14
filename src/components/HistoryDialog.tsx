@@ -34,7 +34,6 @@ export default function HistoryDialog() {
 
   useEffect(() => {
     if (!open) return
-    setQuery('')
     function onKeyDown(e: KeyboardEvent) {
       if (e.key === 'Escape') close()
     }

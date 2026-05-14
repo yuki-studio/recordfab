@@ -17,14 +17,18 @@ export default function Layout() {
   const confirmCloseTab = useRecording((s) => s.confirmCloseTab)
 
   return (
-    <div className="flex h-screen bg-[#202020] text-[#eee]">
-      <aside className="flex w-[240px] shrink-0 flex-col border-r border-[#292929] bg-[#161719]">
-        <a 
-          href={PRODUCT_URL} 
-          target="_blank" 
-          rel="noreferrer" 
-          className="flex items-start gap-3 px-6 py-5 hover:opacity-80 transition-opacity"
+    <div className="grid min-h-screen place-items-center bg-[#0f1011]">
+      <div data-testid="app-frame" className="flex h-[700px] w-[1200px] bg-[#202020] text-[#eee]">
+        <aside
+          data-testid="app-sidebar"
+          className="flex h-full w-[240px] shrink-0 flex-col border-r border-[#292929] bg-[#161719]"
         >
+          <a
+            href={PRODUCT_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-start gap-3 px-6 py-5 transition-opacity hover:opacity-80"
+          >
           <img src="/logo.png" alt="RecordFab logo" className="h-10 w-10 shrink-0 object-contain" />
           <div className="pt-0.5 leading-none">
             <img src="/wordmark.png" alt="RecordFab" className="h-4 w-auto object-contain" style={{ filter: 'invert(1)' }} />
@@ -41,23 +45,24 @@ export default function Layout() {
           />
           <NavItem to="/files" icon={<Folder size={16} />} label="My Files" badge={badge} />
         </nav>
-      </aside>
+        </aside>
 
-      <main className="flex flex-1 flex-col overflow-hidden">
-        <Outlet />
-      </main>
+        <main data-testid="app-main" className="flex h-full w-[960px] flex-col overflow-hidden">
+          <Outlet />
+        </main>
 
-      <ExitRecordingDialog
-        open={closeTabConfirmOpen}
-        onClose={cancelCloseTab}
-        onConfirm={() => {
-          confirmCloseTab()
-          navigate('/')
-        }}
-      />
-      <WelcomeDialog />
-      <HistoryDialog />
-      <ClearHistoryConfirmDialog />
+        <ExitRecordingDialog
+          open={closeTabConfirmOpen}
+          onClose={cancelCloseTab}
+          onConfirm={() => {
+            confirmCloseTab()
+            navigate('/')
+          }}
+        />
+        <WelcomeDialog />
+        <HistoryDialog />
+        <ClearHistoryConfirmDialog />
+      </div>
     </div>
   )
 }

@@ -33,12 +33,15 @@ export default function SettingsMenu({ open, onClose, onOpenAuthorize, onOpenLic
       ref={ref}
       role="menu"
       aria-label="Settings"
-      className="absolute right-3 top-[44px] z-50 w-[264px] overflow-hidden rounded-xl border border-[#2a2a2c] bg-[#161719] shadow-[0_12px_40px_0_rgba(15,16,17,0.45)]"
+      className="absolute right-5 top-[44px] z-50 w-[264px] overflow-hidden rounded-xl border border-[#2a2a2c] shadow-[0_12px_40px_0_rgba(15,16,17,0.45)]"
+      style={{
+        background: 'linear-gradient(180deg, #1a1b1d 0%, #111214 100%)',
+      }}
     >
-      <div className="flex h-12 items-center px-6 text-[20px] leading-7 text-[#eee]">
+      <div className="flex h-[54px] items-center px-6 text-[20px] leading-7 text-[#eee]">
         Settings
       </div>
-      <div className="h-px bg-[#2a2a2c]" />
+      <div className="h-px bg-[#0f1011]/80" />
 
       <MenuItem
         onClick={() => {
@@ -59,12 +62,12 @@ export default function SettingsMenu({ open, onClose, onOpenAuthorize, onOpenLic
       </MenuItem>
       <MenuItem onClick={onClose}>Member Center</MenuItem>
 
-      <div className="my-2 h-px bg-[#2a2a2c]" />
+      <div className="my-4 h-px bg-[#0f1011]/80" />
 
       <MenuItem onClick={onClose}>Online Help</MenuItem>
       <MenuItem onClick={onClose}>Feedback</MenuItem>
 
-      <div className="my-2 h-px bg-[#2a2a2c]" />
+      <div className="my-4 h-px bg-[#0f1011]/80" />
 
       <MenuItem onClick={onClose}>Check for update</MenuItem>
       <MenuItem onClick={onClose}>What&apos;s New</MenuItem>

@@ -37,6 +37,18 @@ export type BrowserHistoryItem = {
   visitedAt: number
 }
 
+export type LicenseSubscriptionType = 'trial' | 'subscription' | 'lifetime'
+
+export type LicenseInfoView =
+  | {
+      mode: 'success'
+      email: string
+      subscription: LicenseSubscriptionType
+    }
+  | {
+      mode: 'failure'
+    }
+
 type RecordingState = {
   detectionState: DetectionState
   currentSiteSlug: string | null
@@ -67,6 +79,7 @@ type RecordingState = {
   browserHistory: BrowserHistoryItem[]
   authorizeDialogOpen: boolean
   licenseInfoDialogOpen: boolean
+  licenseInfoView: LicenseInfoView
 
   openWelcomeOnce: () => void
   closeWelcome: () => void
@@ -105,7 +118,7 @@ type RecordingState = {
 
   openAuthorizeDialog: () => void
   closeAuthorizeDialog: () => void
-  openLicenseInfoDialog: () => void
+  openLicenseInfoDialog: (view?: LicenseInfoView) => void
   closeLicenseInfoDialog: () => void
 }
 
@@ -225,6 +238,7 @@ export const useRecording = create<RecordingState>((set, get) => ({
   browserHistory: INITIAL_BROWSER_HISTORY,
   authorizeDialogOpen: false,
   licenseInfoDialogOpen: false,
+  licenseInfoView: { mode: 'success', email: 'Nora@gmail.com', subscription: 'lifetime' },
 
   openWelcomeOnce: () => {
     const state = get()
@@ -461,7 +475,11 @@ export const useRecording = create<RecordingState>((set, get) => ({
 
   openAuthorizeDialog: () => set({ authorizeDialogOpen: true }),
   closeAuthorizeDialog: () => set({ authorizeDialogOpen: false }),
-  openLicenseInfoDialog: () => set({ licenseInfoDialogOpen: true }),
+  openLicenseInfoDialog: (view) =>
+    set({
+      licenseInfoDialogOpen: true,
+      licenseInfoView: view ?? { mode: 'success', email: 'Nora@gmail.com', subscription: 'lifetime' },
+    }),
   closeLicenseInfoDialog: () => set({ licenseInfoDialogOpen: false }),
 }))
 

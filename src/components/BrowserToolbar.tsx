@@ -10,13 +10,17 @@ export default function BrowserToolbar({ url, supported }: Props) {
   const openHistoryDialog = useRecording((s) => s.openHistoryDialog)
   return (
     <div className="flex items-center gap-2 border-b border-[#161719] bg-[#202020] px-3 py-2">
-      <button className="rounded-md p-1.5 text-[#aeb1b6] hover:bg-white/5" aria-label="Back">
+      <button
+        className="rounded-md p-1.5 text-[#aeb1b6] hover:bg-white/5"
+        aria-label="Previous"
+        title="Previous"
+      >
         <ArrowLeft size={16} />
       </button>
-      <button className="rounded-md p-1.5 text-[#aeb1b6] hover:bg-white/5" aria-label="Forward">
+      <button className="rounded-md p-1.5 text-[#aeb1b6] hover:bg-white/5" aria-label="Next" title="Next">
         <ArrowRight size={16} />
       </button>
-      <button className="rounded-md p-1.5 text-[#aeb1b6] hover:bg-white/5" aria-label="Refresh">
+      <button className="rounded-md p-1.5 text-[#aeb1b6] hover:bg-white/5" aria-label="Refresh" title="Refresh">
         <RotateCw size={16} />
       </button>
 

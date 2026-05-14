@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { X } from 'lucide-react'
+import { useRecording } from '../stores/recording'
 
 type Props = {
   open: boolean
@@ -10,24 +11,34 @@ export default function AuthorizeDialog({ open, onClose }: Props) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
-  const [status, setStatus] = useState<'idle' | 'verifying' | 'error'>('idle')
+  const [status, setStatus] = useState<'idle' | 'verifying' | 'google_waiting' | 'error'>('idle')
+  const openLicenseInfoDialog = useRecording((s) => s.openLicenseInfoDialog)
+  const isPaid = useRecording((s) => s.isPaid)
+  const googleTimerRef = useRef<number | null>(null)
 
   const emailValue = email.trim()
   const canAuthorize = useMemo(() => emailValue.length > 0 && password.length > 0 && status !== 'verifying', [emailValue, password, status])
   const emailFormatOk = useMemo(() => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue), [emailValue])
 
   useEffect(() => {
-    if (status === 'error') {
-      setStatus('idle')
+    return () => {
+      if (googleTimerRef.current) {
+        window.clearTimeout(googleTimerRef.current)
+      }
     }
-  }, [emailValue])
+  }, [])
 
   if (!open) return null
 
   return (
     <div
       className="fixed inset-0 z-50 grid place-items-center bg-black/45 backdrop-blur-sm"
-      onClick={(e) => e.target === e.currentTarget && onClose()}
+      onClick={(e) => {
+        if (e.target !== e.currentTarget) return
+        if (googleTimerRef.current) window.clearTimeout(googleTimerRef.current)
+        setStatus('idle')
+        onClose()
+      }}
     >
       <article
         role="dialog"
@@ -38,7 +49,11 @@ export default function AuthorizeDialog({ open, onClose }: Props) {
         <button
           type="button"
           aria-label="Close"
-          onClick={onClose}
+          onClick={() => {
+            if (googleTimerRef.current) window.clearTimeout(googleTimerRef.current)
+            setStatus('idle')
+            onClose()
+          }}
           className="absolute right-5 top-5 grid size-8 place-items-center rounded-md hover:bg-white/5"
         >
           <X size={16} className="text-[#aeb1b6]" />
@@ -55,132 +70,186 @@ export default function AuthorizeDialog({ open, onClose }: Props) {
           />
         </div>
 
-        <div id="authorize-title" className="absolute left-10 top-[130px] text-[14px] leading-5 text-[#eee]">
-          Authorize this computer with your account.
-        </div>
+        {status === 'google_waiting' ? (
+          <>
+            <div id="authorize-title" className="absolute left-10 top-[130px] text-[14px] leading-5 text-[#eee]">
+              Waiting to sign in
+            </div>
+            <div className="absolute left-10 top-[190px] h-1.5 w-[400px] overflow-hidden rounded-full bg-[#323234]">
+              <div className="h-full w-[120px] rounded-full bg-[#4162fb]" />
+            </div>
+            <div className="absolute left-10 top-[216px] w-[400px] space-y-2 text-[14px] leading-5 text-[#595b5f]">
+              <div>We&apos;ve opened a new browser tab for you to log in.</div>
+              <div>Please complete the sign-in process in the browser.</div>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                if (googleTimerRef.current) window.clearTimeout(googleTimerRef.current)
+                setStatus('idle')
+                onClose()
+              }}
+              className="absolute left-10 top-[486px] h-11 w-[400px] rounded-lg text-[16px] leading-[18px] text-[#eee]"
+              style={{ backgroundColor: '#242426' }}
+            >
+              Cancel
+            </button>
+          </>
+        ) : (
+          <>
+            <div id="authorize-title" className="absolute left-10 top-[130px] text-[14px] leading-5 text-[#eee]">
+              Authorize this computer with your account.
+            </div>
 
-        <button
-          type="button"
-          onClick={() => window.open('https://accounts.google.com', '_blank', 'noopener,noreferrer')}
-          className="absolute left-10 top-[174px] flex h-11 w-[400px] items-center overflow-hidden rounded-md"
-          style={{
-            background: 'linear-gradient(270deg, #4162fb 0%, #7041fb 100%)',
-          }}
-        >
-          <div
-            className="grid h-11 w-11 place-items-center bg-white"
-            style={{ border: '2px solid #475ffb', borderRadius: 6 }}
-          >
-            <span className="text-[12px] font-semibold text-[#595b5f]">G</span>
-          </div>
-          <div className="flex-1 text-center text-[16px] leading-6 text-white">Sign in with Google</div>
-        </button>
+            <button
+              type="button"
+              onClick={() => {
+                const w = window.open('https://accounts.google.com', '_blank', 'noopener,noreferrer')
+                setStatus('google_waiting')
+                if (googleTimerRef.current) window.clearTimeout(googleTimerRef.current)
+                googleTimerRef.current = window.setTimeout(() => {
+                  openLicenseInfoDialog(
+                    w
+                      ? {
+                          mode: 'success',
+                          email: emailValue || 'GoogleUser@gmail.com',
+                          subscription: isPaid ? 'lifetime' : 'trial',
+                        }
+                      : { mode: 'failure' }
+                  )
+                  setStatus('idle')
+                  onClose()
+                }, 1200)
+              }}
+              className="absolute left-10 top-[174px] flex h-11 w-[400px] items-center overflow-hidden rounded-md"
+              style={{
+                background: 'linear-gradient(270deg, #4162fb 0%, #7041fb 100%)',
+              }}
+            >
+              <div
+                className="grid h-11 w-11 place-items-center bg-white"
+                style={{ border: '2px solid #475ffb', borderRadius: 6 }}
+              >
+                <span className="text-[12px] font-semibold text-[#595b5f]">G</span>
+              </div>
+              <div className="flex-1 text-center text-[16px] leading-6 text-white">Sign in with Google</div>
+            </button>
 
-        <div className="absolute left-10 top-[226px] flex h-5 w-[400px] items-center gap-3">
-          <div
-            className="h-px flex-1"
-            style={{
-              background: 'linear-gradient(to left, #595b5f, rgba(89,91,95,0.16))',
-            }}
-          />
-          <div className="text-[14px] leading-5 text-[#595b5f]">or</div>
-          <div
-            className="h-px flex-1"
-            style={{
-              background: 'linear-gradient(to right, #595b5f, rgba(89,91,95,0.16))',
-            }}
-          />
-        </div>
+            <div className="absolute left-10 top-[226px] flex h-5 w-[400px] items-center gap-3">
+              <div
+                className="h-px flex-1"
+                style={{
+                  background: 'linear-gradient(to left, #595b5f, rgba(89,91,95,0.16))',
+                }}
+              />
+              <div className="text-[14px] leading-5 text-[#595b5f]">or</div>
+              <div
+                className="h-px flex-1"
+                style={{
+                  background: 'linear-gradient(to right, #595b5f, rgba(89,91,95,0.16))',
+                }}
+              />
+            </div>
 
-        <div
-          className={`absolute left-10 top-[254px] flex h-11 w-[400px] items-center gap-2 rounded-md bg-[#242426] px-4 ${
-            status === 'error' ? 'border border-[#e02020]' : 'border border-transparent'
-          }`}
-        >
-          <span className="text-[12px] text-[#595b5f]">@</span>
-          <input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            disabled={status === 'verifying'}
-            className="h-11 flex-1 bg-transparent text-[14px] leading-5 text-[#eee] outline-none placeholder:text-[#aeb1b6]"
-            placeholder="Enter your E-mail"
-          />
-        </div>
+            <div
+              className={`absolute left-10 top-[254px] flex h-11 w-[400px] items-center gap-2 rounded-md bg-[#242426] px-4 ${
+                status === 'error' ? 'border border-[#e02020]' : 'border border-transparent'
+              }`}
+            >
+              <span className="text-[12px] text-[#595b5f]">@</span>
+              <input
+                value={email}
+                onChange={(e) => {
+                  if (status === 'error') setStatus('idle')
+                  setEmail(e.target.value)
+                }}
+                disabled={status === 'verifying'}
+                className="h-11 flex-1 bg-transparent text-[14px] leading-5 text-[#eee] outline-none placeholder:text-[#aeb1b6]"
+                placeholder="Enter your E-mail"
+              />
+            </div>
 
-        <div className="absolute left-10 top-[306px] flex h-11 w-[400px] items-center gap-2 rounded-md bg-[#242426] px-4">
-          <span className="text-[12px] text-[#595b5f]">🔒</span>
-          <input
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            type={showPassword ? 'text' : 'password'}
-            disabled={status === 'verifying'}
-            className="h-11 flex-1 bg-transparent text-[14px] leading-5 text-[#eee] outline-none placeholder:text-[#aeb1b6]"
-            placeholder="Enter your password"
-          />
-          <button
-            type="button"
-            aria-label="toggle password"
-            onClick={() => setShowPassword((s) => !s)}
-            className="grid size-6 place-items-center rounded hover:bg-white/5"
-          >
-            <span className="text-[12px] text-[#aeb1b6]">{showPassword ? '🙈' : '👁'}</span>
-          </button>
-        </div>
+            <div className="absolute left-10 top-[306px] flex h-11 w-[400px] items-center gap-2 rounded-md bg-[#242426] px-4">
+              <span className="text-[12px] text-[#595b5f]">🔒</span>
+              <input
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                type={showPassword ? 'text' : 'password'}
+                disabled={status === 'verifying'}
+                className="h-11 flex-1 bg-transparent text-[14px] leading-5 text-[#eee] outline-none placeholder:text-[#aeb1b6]"
+                placeholder="Enter your password"
+              />
+              <button
+                type="button"
+                aria-label="toggle password"
+                onClick={() => setShowPassword((s) => !s)}
+                className="grid size-6 place-items-center rounded hover:bg-white/5"
+              >
+                <span className="text-[12px] text-[#aeb1b6]">{showPassword ? '🙈' : '👁'}</span>
+              </button>
+            </div>
 
-        {status === 'verifying' && (
-          <div className="absolute left-10 top-[362px] text-[14px] leading-5 text-[#595b5f]">Verifying account information......</div>
+            {status === 'verifying' && (
+              <div className="absolute left-10 top-[362px] text-[14px] leading-5 text-[#595b5f]">Verifying account information......</div>
+            )}
+            {status === 'error' && (
+              <div className="absolute left-10 top-[362px] text-[14px] leading-5 text-[#e02020]">
+                E-mail format is incorrect, please check it and try again.
+              </div>
+            )}
+
+            <button
+              type="button"
+              disabled={!canAuthorize}
+              onClick={() => {
+                if (status === 'verifying') return
+                if (!emailFormatOk) {
+                  setStatus('error')
+                  return
+                }
+                setStatus('verifying')
+                window.setTimeout(() => {
+                  openLicenseInfoDialog({
+                    mode: 'success',
+                    email: emailValue,
+                    subscription: isPaid ? 'lifetime' : 'trial',
+                  })
+                  setStatus('idle')
+                  onClose()
+                }, 1200)
+              }}
+              className="absolute left-10 top-[410px] h-11 w-[400px] rounded-lg text-[16px] leading-[18px] text-white"
+              style={{ backgroundColor: canAuthorize ? '#4162fb' : '#323234' }}
+            >
+              Authorize
+            </button>
+
+            <div className="absolute left-[109px] top-[462px] text-[14px] leading-5 text-[#7f8288]">
+              Don&apos;t have an account? Sign up free{' '}
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault()
+                  window.open('https://www.recordfab.com', '_blank', 'noopener,noreferrer')
+                }}
+                className="text-[#4162fb] hover:underline"
+              >
+                here.
+              </a>
+            </div>
+
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault()
+                window.open('https://www.recordfab.com', '_blank', 'noopener,noreferrer')
+              }}
+              className="absolute left-[172px] top-[490px] text-[14px] leading-5 text-[#4162fb] hover:underline"
+            >
+              Forgot the Password?
+            </a>
+          </>
         )}
-        {status === 'error' && (
-          <div className="absolute left-10 top-[362px] text-[14px] leading-5 text-[#e02020]">
-            E-mail format is incorrect, please check it and try again.
-          </div>
-        )}
-
-        <button
-          type="button"
-          disabled={!canAuthorize}
-          onClick={() => {
-            if (status === 'verifying') return
-            if (!emailFormatOk) {
-              setStatus('error')
-              return
-            }
-            setStatus('verifying')
-            window.setTimeout(() => {
-              setStatus('idle')
-              onClose()
-            }, 1200)
-          }}
-          className="absolute left-10 top-[410px] h-11 w-[400px] rounded-lg text-[16px] leading-[18px] text-white"
-          style={{ backgroundColor: canAuthorize ? '#4162fb' : '#323234' }}
-        >
-          Authorize
-        </button>
-
-        <div className="absolute left-[109px] top-[462px] text-[14px] leading-5 text-[#7f8288]">
-          Don&apos;t have an account? Sign up free{' '}
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault()
-              window.open('https://www.recordfab.com', '_blank', 'noopener,noreferrer')
-            }}
-            className="text-[#4162fb] hover:underline"
-          >
-            here.
-          </a>
-        </div>
-
-        <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault()
-            window.open('https://www.recordfab.com', '_blank', 'noopener,noreferrer')
-          }}
-          className="absolute left-[172px] top-[490px] text-[14px] leading-5 text-[#4162fb] hover:underline"
-        >
-          Forgot the Password?
-        </a>
       </article>
     </div>
   )

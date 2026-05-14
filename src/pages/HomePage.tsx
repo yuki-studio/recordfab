@@ -167,26 +167,41 @@ function AddressBar({
   const [open, setOpen] = useState(false)
   const openHistoryDialog = useRecording((s) => s.openHistoryDialog)
   return (
-    <div className="flex h-11 flex-none items-center gap-3 border-b border-[#161719] bg-[#202020] px-4">
-      <button type="button" aria-label="back" className="grid h-8 w-8 place-items-center rounded-md hover:bg-white/5">
+    <div className="flex h-11 flex-none items-center border-b border-[#161719] bg-[#202020]">
+      <button
+        type="button"
+        aria-label="Previous"
+        title="Previous"
+        className="grid h-8 w-8 place-items-center rounded-md hover:bg-white/5"
+      >
         <ArrowLeft size={17} strokeWidth={1.75} className="text-[#74777d]" />
       </button>
-      <button type="button" aria-label="forward" className="grid h-8 w-8 place-items-center rounded-md hover:bg-white/5">
+      <button
+        type="button"
+        aria-label="Next"
+        title="Next"
+        className="grid h-8 w-8 place-items-center rounded-md hover:bg-white/5"
+      >
         <ArrowRight size={17} strokeWidth={1.75} className="text-[#74777d]" />
       </button>
-      <button type="button" aria-label="refresh" className="grid h-8 w-8 place-items-center rounded-md hover:bg-white/5">
+      <button
+        type="button"
+        aria-label="Refresh"
+        title="Refresh"
+        className="grid h-8 w-8 place-items-center rounded-md hover:bg-white/5"
+      >
         <RotateCw size={17} strokeWidth={1.75} className="text-[#74777d]" />
       </button>
 
-      <div className="relative flex-1 min-w-0">
+      <div data-testid="home-search" className="relative ml-4 w-[800px]">
         <div
-          className="flex h-7 w-full items-center gap-2 rounded-md bg-[#161719] px-3 text-[14px] leading-5 text-[#595b5f]"
+          className="flex h-7 w-[800px] items-center gap-2 rounded-md bg-[#161719] px-4 text-[14px] leading-5 text-[#595b5f]"
           style={{ border: open ? '1px solid #4162fb' : '1px solid transparent' }}
           onClick={() => setOpen(true)}
           role="button"
           tabIndex={0}
         >
-          <img src="/figma/nav_icon_search.svg" alt="" className="size-4" />
+          <img src="/figma/nav_icon_search.svg" alt="" className="h-[14px] w-[14px] shrink-0" />
           <input
             className="w-full bg-transparent outline-none placeholder:text-[#595b5f]"
             placeholder="search or visit a website"
@@ -209,7 +224,7 @@ function AddressBar({
         type="button"
         aria-label="history"
         onClick={openHistoryDialog}
-        className="grid h-7 w-7 place-items-center rounded hover:bg-white/5"
+        className="ml-4 grid h-8 w-8 place-items-center rounded hover:bg-white/5"
       >
         <img src="/figma/nav_icon_history.svg" alt="" className="size-4" />
       </button>

@@ -1,4 +1,4 @@
-import { Filter, Folder, FolderOpen, Search, Trash2, X } from 'lucide-react'
+import { Filter, Folder, FolderOpen, Search, X } from 'lucide-react'
 import { formatRecordingTime, useRecording } from '../stores/recording'
 
 export default function FilesPage() {
@@ -12,7 +12,7 @@ export default function FilesPage() {
         <div className="flex items-center justify-between border-b border-[#2a2a2c] px-4 py-3">
           <div className="text-sm font-medium text-[#eee]">Recorded</div>
           <div className="flex items-center gap-2">
-            <button className="rounded-md p-1.5 text-[#aeb1b6] hover:bg-white/5" aria-label="Filter">
+            <button className="rounded-md p-1.5 text-[#aeb1b6] hover:bg-white/5" aria-label="Filter" title="Filter">
               <Filter size={14} />
             </button>
             <label className="flex items-center gap-1.5 rounded-md border border-[#292929] bg-[#202020] px-2 py-1">
@@ -24,11 +24,19 @@ export default function FilesPage() {
                 className="w-32 bg-transparent text-xs text-[#aeb1b6] outline-none placeholder:text-[#595b5f]"
               />
             </label>
-            <button className="rounded-md p-1.5 text-[#aeb1b6] hover:bg-white/5" aria-label="Open folder">
+            <button
+              className="rounded-md p-1.5 text-[#aeb1b6] hover:bg-white/5"
+              aria-label="Open Folder"
+              title="Open Folder"
+            >
               <Folder size={14} />
             </button>
-            <button className="rounded-md p-1.5 text-[#aeb1b6] hover:bg-white/5" aria-label="Clear search">
-              <Trash2 size={14} />
+            <button
+              className="rounded-md p-1.5 text-[#aeb1b6] hover:bg-white/5"
+              aria-label="Delete All"
+              title="Delete All"
+            >
+              <X size={14} />
             </button>
           </div>
         </div>
@@ -72,7 +80,8 @@ export default function FilesPage() {
                     <div className="flex items-center gap-3">
                       <button
                         type="button"
-                        aria-label="Open folder"
+                        aria-label="Open Containing Folder"
+                        title="Open Containing Folder"
                         className="grid h-8 w-8 place-items-center rounded-md text-[#aeb1b6] hover:bg-white/5"
                       >
                         <FolderOpen size={16} />
@@ -80,6 +89,7 @@ export default function FilesPage() {
                       <button
                         type="button"
                         aria-label="Delete"
+                        title="Delete"
                         className="grid h-8 w-8 place-items-center rounded-md text-[#aeb1b6] hover:bg-white/5"
                       >
                         <X size={16} />

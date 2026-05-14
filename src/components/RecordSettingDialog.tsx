@@ -35,22 +35,24 @@ export default function RecordSettingDialog({ recordTitle }: Props) {
         aria-labelledby="record-setting-title"
         className="relative h-[414px] w-[624px] overflow-hidden rounded-xl bg-[#202020] shadow-[0_12px_40px_0_rgba(15,16,17,0.2)]"
       >
-        <div className="px-8 pt-[18px]">
-          <div className="flex items-center justify-between">
-            <h2 id="record-setting-title" className="text-[14px] leading-5 text-[#eee]">
-              Record Setting
-            </h2>
-            <button
-              type="button"
-              aria-label="Close"
-              onClick={close}
-              className="grid size-8 place-items-center rounded-md hover:bg-white/5"
-            >
-              <X size={16} className="text-[#aeb1b6]" />
-            </button>
-          </div>
+        <h2
+          id="record-setting-title"
+          className="absolute left-8 top-[18px] text-[14px] leading-5 text-[#eee]"
+        >
+          Record Setting
+        </h2>
+        <button
+          type="button"
+          aria-label="Close"
+          onClick={close}
+          className="absolute right-5 top-5 grid size-4 place-items-center hover:opacity-80"
+        >
+          <X size={16} className="text-[#aeb1b6]" />
+        </button>
 
-          <div className="relative mt-[32px] h-24 w-[560px] rounded-lg bg-[#242426]">
+        <div className="flex h-full flex-col px-8 pb-8 pt-[70px]">
+
+          <div className="relative h-24 w-[560px] rounded-lg bg-[#242426]">
             <div className="absolute left-3 top-3 grid h-[72px] w-32 place-items-center rounded bg-[#d8d8d8] text-[12px] text-[#595b5f]">
               Thumbnail
             </div>
@@ -86,7 +88,12 @@ export default function RecordSettingDialog({ recordTitle }: Props) {
             <SelectBox value={speed} options={SPEEDS} onChange={setSpeed} />
           </div>
 
-          <div className="mt-4 w-[560px] overflow-hidden rounded bg-[#242426]">
+          <div className="flex-1" />
+
+          <div
+            data-testid="custom-duration-section"
+            className="mt-4 w-[560px] overflow-hidden rounded bg-[#242426]"
+          >
             <div className="flex h-8 items-center justify-between px-4">
               <div className="flex items-center gap-2 text-[14px] leading-5 text-[#eee]">
                 <span>Custom Recording Length</span>
@@ -107,7 +114,10 @@ export default function RecordSettingDialog({ recordTitle }: Props) {
             {customDuration ? (
               <>
                 <div className="mx-auto h-px w-[532px] bg-[#292935]" />
-                <div className="flex h-8 items-center px-4 text-[14px] leading-5 text-[#eee]">
+                <div
+                  data-testid="custom-duration-row"
+                  className="flex h-8 items-center px-4 text-[14px] leading-5 text-[#eee]"
+                >
                   <span className="mr-2">Recording Stops when the video reaches</span>
                   <NumberStepper value={stopAfterMinutes} onChange={setStopAfterMinutes} />
                   <span className="ml-2">minutes.</span>
@@ -115,23 +125,23 @@ export default function RecordSettingDialog({ recordTitle }: Props) {
               </>
             ) : null}
           </div>
-        </div>
 
-        <div className="absolute bottom-8 right-8 flex items-center gap-2">
-          <button
-            type="button"
-            onClick={start}
-            className="h-8 w-[88px] rounded-md bg-[#4162fb] text-[14px] leading-5 text-white hover:bg-[#3a54cf]"
-          >
-            OK
-          </button>
-          <button
-            type="button"
-            onClick={close}
-            className="h-8 w-[88px] rounded-md border border-[#7f8186] text-[14px] leading-5 text-[#aeb1b6] hover:bg-white/5"
-          >
-            Cancel
-          </button>
+          <div data-testid="record-setting-footer" className="mt-5 flex items-center justify-end gap-2">
+            <button
+              type="button"
+              onClick={start}
+              className="h-8 w-[88px] rounded-md bg-[#4162fb] text-[14px] leading-5 text-white hover:bg-[#3a54cf]"
+            >
+              OK
+            </button>
+            <button
+              type="button"
+              onClick={close}
+              className="h-8 w-[88px] rounded-md border border-[#7f8186] text-[14px] leading-5 text-[#aeb1b6] hover:bg-white/5"
+            >
+              Cancel
+            </button>
+          </div>
         </div>
       </article>
     </div>

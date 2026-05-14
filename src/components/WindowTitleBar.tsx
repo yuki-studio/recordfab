@@ -18,6 +18,7 @@ export default function WindowTitleBar() {
   const licenseOpen = useRecording((s) => s.licenseInfoDialogOpen)
   const openLicense = useRecording((s) => s.openLicenseInfoDialog)
   const closeLicense = useRecording((s) => s.closeLicenseInfoDialog)
+  const licenseView = useRecording((s) => s.licenseInfoView)
 
   return (
     <div
@@ -47,13 +48,13 @@ export default function WindowTitleBar() {
       >
         <Menu size={16} strokeWidth={1.7} className="text-[#6f757d]" />
       </TitleActionButton>
-      <TitleActionButton label="minimize">
+      <TitleActionButton label="Minimize" title="Minimize">
         <Minus size={16} strokeWidth={1.7} className="text-[#6f757d]" />
       </TitleActionButton>
-      <TitleActionButton label="maximize">
+      <TitleActionButton label="Maximize" title="Maximize">
         <Square size={13} strokeWidth={1.7} className="text-[#6f757d]" />
       </TitleActionButton>
-      <TitleActionButton label="close">
+      <TitleActionButton label="Exit" title="Exit">
         <X size={17} strokeWidth={1.7} className="text-[#6f757d]" />
       </TitleActionButton>
 
@@ -64,18 +65,20 @@ export default function WindowTitleBar() {
         onOpenLicenseInfo={openLicense}
       />
       <AuthorizeDialog open={authorizeOpen} onClose={closeAuthorize} />
-      <LicenseInfoDialog open={licenseOpen} onClose={closeLicense} />
+      <LicenseInfoDialog open={licenseOpen} onClose={closeLicense} view={licenseView} />
     </div>
   )
 }
 
 function TitleActionButton({
   label,
+  title,
   children,
   badge,
   onClick,
 }: {
   label: string
+  title?: string
   children: React.ReactNode
   badge?: string
   onClick?: () => void
@@ -84,6 +87,7 @@ function TitleActionButton({
     <button
       type="button"
       aria-label={label}
+      title={title}
       onClick={onClick}
       className="relative grid h-8 w-8 place-items-center rounded-md hover:bg-white/5"
     >
