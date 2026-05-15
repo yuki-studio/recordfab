@@ -1,8 +1,10 @@
+import { useState } from 'react'
 import { Filter, Folder, FolderOpen, Search, X } from 'lucide-react'
 import { formatRecordingTime, useRecording } from '../stores/recording'
 
 export default function FilesPage() {
   const files = useRecording((s) => s.files)
+  const [searchFocused, setSearchFocused] = useState(false)
 
   // Mock total file size (in bytes) - in a real app this would come from actual file data
   const totalSizeGB = 50 // Mock: 50GB total
@@ -18,13 +20,18 @@ export default function FilesPage() {
             <button className="rounded-md p-1.5 text-[#aeb1b6] hover:bg-white/5" aria-label="Filter" title="Filter">
               <Filter size={14} />
             </button>
-            <label className="flex items-center gap-1.5 rounded-md border border-[#292929] bg-[#202020] px-2 py-1">
+            <label
+              className="flex items-center gap-1.5 rounded-md border bg-[#202020] px-2 py-1"
+              style={{ borderColor: searchFocused ? '#4162fb' : '#292929' }}
+            >
               <Search size={12} className="text-[#595b5f]" />
               <input
                 type="text"
                 placeholder="Search"
                 aria-label="Search"
                 className="w-32 bg-transparent text-xs text-[#aeb1b6] outline-none placeholder:text-[#595b5f]"
+                onFocus={() => setSearchFocused(true)}
+                onBlur={() => setSearchFocused(false)}
               />
             </label>
             <button
