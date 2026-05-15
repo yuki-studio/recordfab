@@ -11,15 +11,6 @@ export default function FilesPage() {
     <div className="flex h-full flex-col overflow-hidden bg-[#202020] px-8 py-6">
       <h1 className="text-xl font-semibold text-[#eee]">My Files</h1>
 
-      {/* File stats: count and total size */}
-      <div
-        className="mt-7 font-['Arial'] text-[14px] font-normal leading-5 text-[#AEB1B6]"
-      >
-        <span>{files.length} Files</span>
-        <span className="mx-3">|</span>
-        <span>{totalSizeGB}G</span>
-      </div>
-
       <section className="mt-5 flex min-h-0 flex-1 flex-col rounded-lg bg-[#242426]">
         <div className="flex items-center justify-between border-b border-[#2a2a2c] px-4 py-3">
           <div className="text-sm font-medium text-[#eee]">Recorded</div>
@@ -114,6 +105,15 @@ export default function FilesPage() {
           )}
         </div>
       </section>
+
+      {/* File stats at bottom left */}
+      <div
+        className="mt-7 font-['Arial'] text-[14px] font-normal leading-5 text-[#AEB1B6]"
+      >
+        <span>{files.length} Files</span>
+        <span className="mx-3">|</span>
+        <span>{totalSizeGB}G</span>
+      </div>
     </div>
   )
 }
